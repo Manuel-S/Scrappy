@@ -1,4 +1,1 @@
-Scrappy
-=======
-
-Scraping Framework in C#
+![Scrappy Logo](./Scrappy.png)Scrappy=======Scraping Framework in C#
