@@ -1,1 +1,1 @@
-![Scrappy Logo](./Scrappy.png)Scrappy=======Scraping Framework in C#
+Scrappy=======![Scrappy Logo](Scrappy - small.png)Scraping Framework in C#

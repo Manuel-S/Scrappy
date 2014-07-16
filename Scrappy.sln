@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrappyTest", "ScrappyTest\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5205337B-84C9-49A0-A62B-F38BE1AABD84}"
 	ProjectSection(SolutionItems) = preProject
+		Scrappy - small.png = Scrappy - small.png
 		Scrappy.png = Scrappy.png
 		Scrappy.svg = Scrappy.svg
 	EndProjectSection
