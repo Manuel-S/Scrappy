@@ -68,14 +68,21 @@ namespace Scrappy
 
 		public Task<WebPage> Submit(bool asJson = false)
 		{
-
-			var method = String.Compare("post", formNode.Attr("method"), StringComparison.OrdinalIgnoreCase) == 0
-				? HttpVerb.Post : HttpVerb.Get;
-
 			var formurl = formNode.Attr("action") ?? "";
 			var uri = new Uri(baseUri, formurl);
 
-			return browser.SendFormData(uri.ToString(), method, formValues, asJson);
+			return browser.OpenWithData(uri.ToString(), Method, formValues, asJson);
+		}
+
+		public HttpVerb Method
+		{
+			get
+			{
+				return String.Compare("post", formNode.Attr("method") ?? "", StringComparison.OrdinalIgnoreCase) == 0
+					? HttpVerb.Post
+					: HttpVerb.Get;
+			}
+			set { formNode.Attr("method", value.ToString()); }
 		}
 	}
 }

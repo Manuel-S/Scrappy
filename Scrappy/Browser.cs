@@ -70,7 +70,7 @@ namespace Scrappy
 
 
 
-		public async Task<WebPage> SendFormData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson)
+		public async Task<WebPage> OpenWithData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson)
 		{
 			if (method == HttpVerb.Get)
 			{
@@ -85,10 +85,10 @@ namespace Scrappy
 
 			var httpcontent = new StringContent(asJson ? formData.ToJson() : formData.ToQuery());
 
-			return await SendFormData(url, method, httpcontent);
+			return await OpenWithData(url, method, httpcontent);
 		}
 
-		public async Task<WebPage> SendFormData(string url, HttpVerb method, HttpContent httpcontent)
+		public async Task<WebPage> OpenWithData(string url, HttpVerb method, HttpContent httpcontent)
 		{
 			var uri = new Uri(url);
 			string content;
