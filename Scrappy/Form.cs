@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CsQuery;
+using CsQuery.ExtensionMethods;
 using CsQuery.ExtensionMethods.Internal;
 
 namespace Scrappy
@@ -28,7 +29,6 @@ namespace Scrappy
 			formValues = new Dictionary<string, string>();
 
 
-			formValues.AddRange(
 				formNode
 				.Select("input[type=\"text\"]," +
 						  "input[type=\"hidden\"]," +
@@ -37,11 +37,11 @@ namespace Scrappy
 						  "input[type=\"checkbox\"]:checked," +
 				        "select," +
 				        "input:not([type])," +
-				        "textarea")
+				        "textarea",formNode)
 				.Where(x => !string.IsNullOrWhiteSpace(x.Name))
 				.Select(x =>
 					new KeyValuePair<string, string>(x.Name, x.NodeName == "TEXTAREA" ? x.InnerHTML : x.Value)
-					));
+					).ForEach(x => formValues[x.Key] = x.Value);
 		}
 
 		public Form Set(object values)

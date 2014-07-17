@@ -8,12 +8,12 @@ namespace Scrappy
 	public class WebPage : CQ
 	{
 		private readonly Browser browser;
-		private readonly Uri baseUri;
+		private readonly Uri uri;
 
-		internal WebPage(Browser b, string html, Uri baseUri) : base(html, b.ParsingMode, b.ParsingOptions, b.DocType)
+		internal WebPage(Browser b, string html, Uri uri) : base(html, b.ParsingMode, b.ParsingOptions, b.DocType)
 		{
 			browser = b;
-			this.baseUri = baseUri;
+			this.uri = uri;
 		}
 
 		public Form GetForm(string selector)
@@ -23,7 +23,7 @@ namespace Scrappy
 
 		public Form GetForm(CQ nodes)
 		{
-			return new Form(browser, nodes, baseUri);
+			return new Form(browser, nodes, new Uri(uri.GetLeftPart(UriPartial.Path)));
 		}
 
 		public Task<WebPage> Follow(string selector)
@@ -39,8 +39,13 @@ namespace Scrappy
 				throw  new ArgumentException("Node is not a link");
 
 			var url = node.Attr("href");
-			var uri = new Uri(baseUri, url);
-			return browser.Open(uri.ToString());
+			return Open(url);
+		}
+
+		public Task<WebPage> Open(string url)
+		{
+			var newuri = new Uri(new Uri(uri.GetLeftPart(UriPartial.Path)), url);
+			return browser.Open(newuri.ToString());
 		}
 
 		public Task<WebPage> Click(string text, bool partialMatch = true, CultureInfo culture = null, CompareOptions compareOptions = CompareOptions.IgnoreCase)
@@ -71,12 +76,12 @@ namespace Scrappy
 				if (follow)
 				{
 					var url = link.GetAttribute("href");
-					var uri = new Uri(baseUri, url);
-					return browser.Open(uri.ToString());
+					return Open(url);
 				}
 			}
 
 			throw new Exception("No matching link was found.");
 		}
+
 	}
 }
