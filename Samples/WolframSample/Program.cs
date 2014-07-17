@@ -36,13 +36,14 @@ namespace WolframSample
 
 
 			// on complex queries, the computation is done asynchronously and needs to be loaded seperately
-			var isasync = new Regex("asynchronousPod\\(\"(?<result>.*?)\", \".*?\", \".*?\", \".*?\", \".*?\", \"Result\" \\)").Match(page);
-			if (isasync.Success)
+			var isAsync = new Regex("asynchronousPod\\(\"(?<result>.*?)\", \".*?\", \".*?\","
+					+ " \".*?\", \".*?\", \"Result\" \\)").Match(page);
+			if (isAsync.Success)
 			{
-				var asyncresult = resultpage.Open(isasync.Groups["result"].Value).Result;
+				var asyncResult = resultpage.Open(isAsync.Groups["result"].Value).Result;
 
 				//replace the content we are going to look for the result with the asynchronously gathered content
-				page = asyncresult.Render();
+				page = asyncResult.Render();
 			}
 
 
