@@ -30,7 +30,8 @@ var myIp = page.Select("#ip").InnerText;
 
 ####Samples####
 
-[WolframCalculator][s1]: Commandline tool which sends an expression to wolframalpha.com and displays the plain-text result to the user.
+1.) [WolframCalculator][s1]: Commandline tool which sends an expression to wolframalpha.com and displays the plain-text result to the user.
+2.) [Tests][s2]: Check out the tests for Scrappy to see what can be done with it. 
 
 
 ####Planned Features####
@@ -43,3 +44,4 @@ var myIp = page.Select("#ip").InnerText;
 [1]: https://github.com/jamietre/CsQuery
 
 [s1]: https://github.com/Manuel-S/Scrappy/blob/master/Samples/WolframSample/Program.cs
+[s2]: https://github.com/Manuel-S/Scrappy/blob/master/ScrappyTest/FormTests.cs
