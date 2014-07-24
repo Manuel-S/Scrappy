@@ -1,0 +1,13 @@
+; Top-most EditorConfig file
+root = true
+
+; Windows-style newlines
+[*]
+end_of_line = CR
+trim_trailing_whitespace = true
+
+; 4-column space indentation
+[{*.cs,*.ts,*.cpp,*.h}]
+indent_style = space
+indent_size = 4
+tab_width = 4
