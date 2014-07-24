@@ -35,11 +35,13 @@ namespace ScrappyTest
                 Assert.AreEqual("id=50&name=&email=&betreff=Hilfe&text=&submit=absenden", requestcontent);
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new StringContent(File.ReadAllText("simple form.html"))
+                    Content = new StringContent("Everything worked if this is returned")
                 };
             });
 
             var waitForRequestToFinish = form.Submit().Result;
+
+            waitForRequestToFinish.ToString().Is("Everything worked if this is returned");
 
         }
     }

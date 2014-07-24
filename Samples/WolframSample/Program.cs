@@ -43,7 +43,7 @@ namespace WolframSample
                 var asyncResult = resultpage.Open(isAsync.Groups["result"].Value).Result;
 
                 //replace the content we are going to look for the result with the asynchronously gathered content
-                page = asyncResult.Render();
+                page = asyncResult.ToString();
             }
 
 

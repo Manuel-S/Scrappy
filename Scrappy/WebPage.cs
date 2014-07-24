@@ -120,5 +120,10 @@ namespace Scrappy
             throw new Exception("No matching link was found.");
         }
 
+
+        public override string ToString()
+        {
+            return base.SelectionHtml(true);
+        }
     }
 }
