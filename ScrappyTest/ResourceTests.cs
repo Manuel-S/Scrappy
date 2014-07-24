@@ -72,7 +72,7 @@ namespace ScrappyTest
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new StringContent(File.ReadAllText("simple resources.html"))
+                    Content = new StringContent(File.ReadAllText("Content/simple resources.html"))
                 };
                 response.Content.Headers.ContentType.MediaType = "text/html";
                 return response;
