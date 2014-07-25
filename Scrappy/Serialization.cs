@@ -29,10 +29,10 @@ namespace Scrappy
             return String.Join("&", properties.ToArray());
         }
 
-        public static string ToQuery(this Dictionary<String, string> obj)
+        public static string ToQuery(this IEnumerable<KeyValuePair<string, string[]>> obj)
         {
             var properties =
-                obj.Select(p => p.Key + "=" + Uri.EscapeDataString(p.Value ?? string.Empty));
+                obj.Select(p => p.Key + "=" + Uri.EscapeDataString(string.Join(", ", p.Value ?? new string[0])));
 
 
             return String.Join("&", properties.ToArray());

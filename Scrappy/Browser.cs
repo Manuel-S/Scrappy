@@ -26,8 +26,8 @@ namespace Scrappy
             ParsingMode = HtmlParsingMode.Auto;
             Client = new HttpClient();
 
-            Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
-            Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
+            //Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
+            //Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
             Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
             Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
 
@@ -56,7 +56,10 @@ namespace Scrappy
             var response = await Client.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             var content = await response.GetContentAsString();
-            var page = new WebPage(this, content, uri);
+            var page = new WebPage(this, content, uri)
+            {
+                Response = response
+            };
 
             if (AutoDownloadResources)
             {
@@ -68,7 +71,7 @@ namespace Scrappy
 
 
 
-        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson)
+        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, IEnumerable<KeyValuePair<string, string[]>> formData, bool asJson = false)
         {
             if (method == HttpVerb.Get)
             {
@@ -83,33 +86,27 @@ namespace Scrappy
 
             var httpcontent = new StringContent(asJson ? formData.ToJson() : formData.ToQuery());
 
-            return await OpenWithFormData(url, method, httpcontent);
+            return await PostWithFormData(url, httpcontent);
         }
 
-        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, HttpContent httpcontent)
+        public async Task<WebPage> PostWithFormData(string url, HttpContent httpcontent)
         {
             var uri = new Uri(url);
             string content;
 
-            switch (method)
-            {
-                case HttpVerb.Post:
-                    var response = await Client.PostAsync(uri, httpcontent);
-                    response.EnsureSuccessStatusCode();
-                    content = await response.Content.ReadAsStringAsync();
-                    break;
-                case HttpVerb.Get:
-                    throw new NotImplementedException();
-                default:
-                    throw new ArgumentException("Invalid HTTP Verb");
-            }
+            var response = await Client.PostAsync(uri, httpcontent);
+            response.EnsureSuccessStatusCode();
+            content = await response.Content.ReadAsStringAsync();
 
-            var page = new WebPage(this, content, new Uri(uri.GetLeftPart(UriPartial.Path)));
-
+            var page = new WebPage(this, content, new Uri(uri.GetLeftPart(UriPartial.Path))) {
+                Response = response };
+            
             if (AutoDownloadResources)
             {
                 await Task.WhenAll(page.Resources.Select(res => res.Response));
             }
+
+
 
             return page;
         }

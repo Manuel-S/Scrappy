@@ -11,7 +11,7 @@ namespace Scrappy
 {
     public static class HttpEx
     {
-        internal static async Task<string> GetContentAsString(this HttpResponseMessage response)
+        public static async Task<string> GetContentAsString(this HttpResponseMessage response)
         {
             string content;
             if (response.Headers.Any(x => x.Key == "Content-Encoding" && x.Value.Contains("gzip")))
@@ -29,7 +29,7 @@ namespace Scrappy
             return content;
         }
 
-        internal static async Task<byte[]> GetContentAsBytes(this HttpResponseMessage response)
+        public static async Task<byte[]> GetContentAsBytes(this HttpResponseMessage response)
         {
             byte[] content;
             if (response.Headers.Any(x => x.Key == "Content-Encoding" && x.Value.Contains("gzip")))

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CsQuery;
+using System.Net;
+using System.Net.Http;
 
 namespace Scrappy
 {
@@ -12,6 +14,7 @@ namespace Scrappy
     {
         private readonly Browser browser;
         private readonly Uri uri;
+
 
         internal WebPage(Browser b, string html, Uri uri)
             : base(html, b.ParsingMode, b.ParsingOptions, b.DocType)
@@ -36,6 +39,8 @@ namespace Scrappy
 
 
         }
+
+        public HttpResponseMessage Response {get; set;}
 
         private void AddWebResource(string resourceUrl, IDomObject item)
         {
@@ -80,7 +85,7 @@ namespace Scrappy
             return browser.Open(newuri.ToString());
         }
 
-        private Uri ConstructUri(string url)
+        public Uri ConstructUri(string url)
         {
             return new Uri(new Uri(uri.GetLeftPart(UriPartial.Path)), url);
         }
@@ -123,7 +128,7 @@ namespace Scrappy
 
         public override string ToString()
         {
-            return base.SelectionHtml(true);
+            return base.Render();
         }
     }
 }

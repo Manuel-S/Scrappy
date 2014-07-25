@@ -72,7 +72,7 @@ namespace Scrappy
             var formurl = formNode.Attr("action") ?? "";
             var uri = new Uri(baseUri, formurl);
 
-            return browser.OpenWithFormData(uri.ToString(), Method, formValues, asJson);
+            return browser.OpenWithFormData(uri.ToString(), Method, formValues.Select(x => new KeyValuePair<string, string[]>(x.Key, new[]{x.Value})), asJson);
         }
 
         public HttpVerb Method
