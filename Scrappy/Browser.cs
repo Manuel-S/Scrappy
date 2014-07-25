@@ -60,7 +60,7 @@ namespace Scrappy
 
             if (AutoDownloadResources)
             {
-                await Task.WhenAll(page.Resources.Select(res => res.Content));
+                await Task.WhenAll(page.Resources.Select(res => res.Response));
             }
 
             return page;
@@ -108,7 +108,7 @@ namespace Scrappy
 
             if (AutoDownloadResources)
             {
-                await Task.WhenAll(page.Resources.Select(res => res.Content));
+                await Task.WhenAll(page.Resources.Select(res => res.Response));
             }
 
             return page;

@@ -21,9 +21,9 @@ namespace ScrappyTest
 
             var page = browser.Open("http://example.com/simple resources.html").Result;
 
-            Assert.AreEqual(4, page.Resources.Count(), "Resources");
+            page.Resources.Count().Is(4);
 
-            Assert.AreEqual(5, handler.Requests.Count, "Total Requests");
+            handler.Requests.Count.Is(5);
         }
 
         [TestMethod]
@@ -35,9 +35,9 @@ namespace ScrappyTest
 
             var page = browser.Open("http://example.com/simple resources.html").Result;
 
-            Assert.AreEqual(4, page.Resources.Count(), "Resources");
+            page.Resources.Count().Is(4);
 
-            Assert.AreEqual(1, handler.Requests.Count, "Total Requests");
+            handler.Requests.Count.Is(1);
         }
 
         [TestMethod]
@@ -51,14 +51,14 @@ namespace ScrappyTest
 
             var resources = page.Resources.ToArray();
 
-            Assert.AreEqual(4, resources.Length, "Resources");
+            resources.Length.Is(4);
 
-            Assert.AreEqual("text/css", resources[0].GuessMimeType);
-            Assert.AreEqual("image/png", resources[1].GuessMimeType);
-            Assert.AreEqual("text/html", resources[2].GuessMimeType);
-            Assert.AreEqual("application/javascript", resources[3].GuessMimeType);
+            resources[0].GuessMimeType.Is("text/css");
+            resources[1].GuessMimeType.Is("image/png");
+            resources[2].GuessMimeType.Is("text/html");
+            resources[3].GuessMimeType.Is("application/javascript");
 
-            Assert.AreEqual(1, handler.Requests.Count, "Total Requests");
+            handler.Requests.Count.Is(1);
         }
 
         [TestMethod]
@@ -82,15 +82,34 @@ namespace ScrappyTest
 
             var resources = page.Resources.ToArray();
 
-            Assert.AreEqual(4, resources.Length, "Resources");
+            resources.Length.Is(4);
 
-            // split off the charset information if there is any
-            Assert.AreEqual("text/html", resources[0].GuessMimeType.Split(';').First());
-            Assert.AreEqual("text/html", resources[1].GuessMimeType.Split(';').First());
-            Assert.AreEqual("text/html", resources[2].GuessMimeType.Split(';').First());
-            Assert.AreEqual("text/html", resources[3].GuessMimeType.Split(';').First());
+            resources.Select(x => x.GuessMimeType.Split(';').First())
+                .All(x => x == "text/html").IsTrue();
 
-            Assert.AreEqual(5, handler.Requests.Count, "Total Requests");
+
+            handler.Requests.Count.Is(5);
+        }
+
+        [TestMethod]
+        public void ShouldOnlyDownloadResourcesOnce()
+        {
+            var handler = new FileSystemHandler(false);
+            var client = new HttpClient(handler);
+            var browser = new Browser(client) { AutoDownloadResources = false };
+
+            var page = browser.Open("http://example.com/simple resources.html").Result;
+
+            var css = page.Resources.First();
+
+            handler.Requests.Count.Is(1);
+
+            var bytes = css.ReadAsBytes().Result;
+
+            var str = css.ReadAsString().Result;
+
+            handler.Requests.Count.Is(2);
+            str.Is(File.ReadAllText("Content/demo_style.css"));
         }
     }
 }

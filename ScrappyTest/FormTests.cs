@@ -32,7 +32,9 @@ namespace ScrappyTest
             fakeHandler.RequestHandlers.Add((request) =>
             {
                 var requestcontent = request.Content.ReadAsStringAsync().Result;
-                Assert.AreEqual("id=50&name=&email=&betreff=Hilfe&text=&submit=absenden", requestcontent);
+
+                requestcontent.Is("id=50&name=&email=&betreff=Hilfe&text=&submit=absenden");
+
                 return new HttpResponseMessage(HttpStatusCode.OK)
                 {
                     Content = new StringContent("Everything worked if this is returned")

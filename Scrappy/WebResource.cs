@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsQuery.ExtensionMethods;
+using System.Net;
+using System.Net.Http;
 
 namespace Scrappy
 {
@@ -14,8 +16,6 @@ namespace Scrappy
         private readonly Browser browser;
         private readonly WebPage webPage;
         private readonly string nodeName;
-        private byte[] content;
-        private Task<byte[]> activeDownload;
 
         private static Dictionary<string, string> MimeTypesByExtension { get; set; }
 
@@ -50,25 +50,28 @@ namespace Scrappy
 
         public string GuessMimeType { get; internal set; }
 
-        public async Task<byte[]> ForceDownload()
-        {
-            var response = await browser.Client.GetAsync(Uri);
+        private Task<HttpResponseMessage> responseTask;
 
-            GuessMimeType = response.Content.Headers.ContentType.ToString();
-
-            content = await response.GetContentAsBytes();
-
-            return content;
-        }
-
-        public Task<byte[]> Content
+        internal Task<HttpResponseMessage> Response
         {
             get
             {
-                if (content != null)
-                    return Task.FromResult(content);
-                return activeDownload ?? (activeDownload = ForceDownload());
+                return responseTask ?? 
+                    (responseTask = browser.Client.GetAsync(Uri)
+                                    .ContinueWith((response) => { GuessMimeType = response.Result.Content.Headers.ContentType.MediaType;
+                                    return response.Result;
+                                    }));
             }
+        }
+
+        public async Task<byte[]> ReadAsBytes()
+        {
+            return await (await Response).GetContentAsBytes();
+        }
+
+        public async Task<string> ReadAsString()
+        {
+            return await (await Response).GetContentAsString();
         }
 
         public string NameSuggestion
