@@ -6,7 +6,7 @@ Scrappy
 
 ![Scrappy Logo](Scrappy - small.png)
 
-If you want to automate tasks in the web, this is your go to library. It uses CsQuery to parse html and ModernHttpClient for session management. 
+If you want to automate tasks in the web, this is your go to library. Navigate through websites with ease, fill out forms comfortably from your couch, let Scrappy do all the dirty work and get you what you want.
 
 Features:
 
