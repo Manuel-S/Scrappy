@@ -44,4 +44,4 @@ var myIp = page.Select("#ip").InnerText;
 [1]: https://github.com/jamietre/CsQuery
 
 [s1]: https://github.com/Manuel-S/Scrappy/blob/master/Samples/WolframSample/Program.cs
-[s2]: https://github.com/Manuel-S/Scrappy/blob/master/ScrappyTest/FormTests.cs
+[s2]: https://github.com/Manuel-S/Scrappy/blob/master/ScrappyTest/
