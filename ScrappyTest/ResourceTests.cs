@@ -10,8 +10,8 @@ using ScrappyTest.Helpers;
 namespace ScrappyTest
 {
     [TestClass]
-    [DeploymentItem("Content/simple resources.html")]
-    [DeploymentItem("Content/demo_style.css")]
+    [DeploymentItem("ScrappyTest/Content/simple resources.html", "Content")]
+    [DeploymentItem("ScrappyTest/Content/demo_style.css", "Content")]
     public class ResourceTests
     {
         [TestMethod]

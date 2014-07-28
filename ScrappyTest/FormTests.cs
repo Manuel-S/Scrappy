@@ -10,7 +10,7 @@ using ScrappyTest.Helpers;
 namespace ScrappyTest
 {
     [TestClass]
-    [DeploymentItem("Content/simple form.html")]
+    [DeploymentItem("ScrappyTest/Content/simple form.html", "Content")]
     public class FormTests
     {
         [TestMethod]
