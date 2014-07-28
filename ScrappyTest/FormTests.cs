@@ -15,6 +15,7 @@ namespace ScrappyTest
 
 
         [TestMethod]
+        [DeploymentItem(@"ScrappyTest\Content\simple_form.html", @"\Content")]
         public void SubmitShouldCaptureAllFormFields()
         {
             var fakeHandler = new FakeHandler();

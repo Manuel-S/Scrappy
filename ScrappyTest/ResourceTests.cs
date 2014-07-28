@@ -10,6 +10,8 @@ using ScrappyTest.Helpers;
 namespace ScrappyTest
 {
     [TestClass]
+    [DeploymentItem(@"ScrappyTest\Content\simple_resources.html", @"\Content")]
+    [DeploymentItem(@"ScrappyTest\Content\demo_style.css", @"\Content")]
     public class ResourceTests
     {
         [TestMethod]
