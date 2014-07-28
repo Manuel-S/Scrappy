@@ -1,10 +1,9 @@
 
 
 
-Scrappy
-=======
+![Scrappy Logo](Scrappy - small.png)  Scrappy  
+======= 
 
-![Scrappy Logo](Scrappy - small.png)
 
 If you want to automate tasks in the web, this is your go to library. Navigate through websites with ease, fill out forms comfortably from your couch, let Scrappy do all the dirty work and get you what you want.
 
@@ -39,6 +38,11 @@ var myIp = page.Select("#ip").InnerText;
 * Resource downloader and management
 * Reactive extensions
 * Javascript interpreter
+
+
+####Continous Integration####
+
+[![scrappy MyGet Build Status](https://www.myget.org/BuildSource/Badge/scrappy?identifier=5cb40dd1-496c-4a81-ae15-41162c8df6f5)](https://www.myget.org/)
 
 
 [1]: https://github.com/jamietre/CsQuery
