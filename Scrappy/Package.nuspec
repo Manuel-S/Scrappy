@@ -1,23 +1,24 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>Scrappy</id>
-    <version>0.1.0</version>
-    <authors>Manuel Schweigert</authors>
-    <owners>Manuel Schweigert</owners>
-    <projectUrl>https://github.com/Manuel-S/Scrappy</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/Manuel-S/Scrappy/master/Scrappy.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>If you want to automate tasks in the web, this is your go to library. Navigate through websites with ease, fill out forms comfortably from your couch, let Scrappy do all the dirty work and get you what you want.</description>
-    <releaseNotes>First release, most basic use cases covered.</releaseNotes>
-    <copyright>Copyright 2014</copyright>
-    <tags>Crawl Scrape Html</tags>
-    <dependencies>
-  <package id="CsQuery" version="1.3.4" />
-  <package id="Microsoft.Bcl" version="1.1.9"  />
-  <package id="Microsoft.Bcl.Build" version="1.0.14"  />
-  <package id="Microsoft.Net.Http" version="2.2.22" />
-  <package id="Newtonsoft.Json" version="6.0.3" />
-    </dependencies>
-  </metadata>
+    <metadata>
+        <id>Scrappy</id>
+        <version>0.1.0</version>
+        <authors>Manuel Schweigert</authors>
+        <owners>Manuel Schweigert</owners>
+        <projectUrl>https://github.com/Manuel-S/Scrappy</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/Manuel-S/Scrappy/master/Scrappy.png</iconUrl>
+        <licenseUrl>https://raw.githubusercontent.com/Manuel-S/Scrappy/master/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>If you want to automate tasks in the web, this is your go to library. Navigate through websites with ease, fill out forms comfortably from your couch, let Scrappy do all the dirty work and get you what you want.</description>
+        <releaseNotes>First release, most basic use cases covered.</releaseNotes>
+        <copyright>Copyright 2014</copyright>
+        <tags>Crawl Scrape Html</tags>
+        <dependencies>
+            <dependency id="CsQuery" version="1.3.4" />
+            <dependency id="Microsoft.Bcl" version="1.1.9"  />
+            <dependency id="Microsoft.Bcl.Build" version="1.0.14"  />
+            <dependency id="Microsoft.Net.Http" version="2.2.22" />
+            <dependency id="Newtonsoft.Json" version="6.0.3" />
+        </dependencies>
+    </metadata>
 </package>
