@@ -10,9 +10,10 @@ using ScrappyTest.Helpers;
 namespace ScrappyTest
 {
     [TestClass]
-    [DeploymentItem("ScrappyTest/Content/simple form.html", "Content")]
     public class FormTests
     {
+
+
         [TestMethod]
         public void SubmitShouldCaptureAllFormFields()
         {
@@ -23,7 +24,7 @@ namespace ScrappyTest
 
             fakeHandler.RequestHandlers.Add((request) => new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(File.ReadAllText("Content/simple form.html"))
+                Content = new StringContent(File.ReadAllText("Content/simple_form.html"))
             });
             var page = browser.Open("http://google.com/testpage.html").Result;
 

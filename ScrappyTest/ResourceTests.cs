@@ -10,8 +10,6 @@ using ScrappyTest.Helpers;
 namespace ScrappyTest
 {
     [TestClass]
-    [DeploymentItem("ScrappyTest/Content/simple resources.html", "Content")]
-    [DeploymentItem("ScrappyTest/Content/demo_style.css", "Content")]
     public class ResourceTests
     {
         [TestMethod]
@@ -21,7 +19,7 @@ namespace ScrappyTest
             var client = new HttpClient(handler);
             var browser = new Browser(client) { AutoDownloadResources = true };
 
-            var page = browser.Open("http://example.com/simple resources.html").Result;
+            var page = browser.Open("http://example.com/simple_resources.html").Result;
 
             page.Resources.Count().Is(4);
 
@@ -35,7 +33,7 @@ namespace ScrappyTest
             var client = new HttpClient(handler);
             var browser = new Browser(client) { AutoDownloadResources = false };
 
-            var page = browser.Open("http://example.com/simple resources.html").Result;
+            var page = browser.Open("http://example.com/simple_resources.html").Result;
 
             page.Resources.Count().Is(4);
 
@@ -49,7 +47,7 @@ namespace ScrappyTest
             var client = new HttpClient(handler);
             var browser = new Browser(client) { AutoDownloadResources = false };
 
-            var page = browser.Open("http://example.com/simple resources.html").Result;
+            var page = browser.Open("http://example.com/simple_resources.html").Result;
 
             var resources = page.Resources.ToArray();
 
@@ -74,13 +72,13 @@ namespace ScrappyTest
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new StringContent(File.ReadAllText("Content/simple resources.html"))
+                    Content = new StringContent(File.ReadAllText("Content/simple_resources.html"))
                 };
                 response.Content.Headers.ContentType.MediaType = "text/html";
                 return response;
             });
 
-            var page = browser.Open("http://example.com/simple resources.html").Result;
+            var page = browser.Open("http://example.com/simple_resources.html").Result;
 
             var resources = page.Resources.ToArray();
 
@@ -100,7 +98,7 @@ namespace ScrappyTest
             var client = new HttpClient(handler);
             var browser = new Browser(client) { AutoDownloadResources = false };
 
-            var page = browser.Open("http://example.com/simple resources.html").Result;
+            var page = browser.Open("http://example.com/simple_resources.html").Result;
 
             var css = page.Resources.First();
 
