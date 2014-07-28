@@ -21,4 +21,9 @@
             <dependency id="Newtonsoft.Json" version="6.0.3" />
         </dependencies>
     </metadata>
+    <files>
+        <file src="bin\Release\Scrappy.dll" target="lib" />
+        <file src="bin\Release\Scrappy.dll.config" target="lib" />
+        <file src="bin\Release\Scrappy.pdb" target="lib" />
+    </files>
 </package>
