@@ -16,13 +16,13 @@ Features:
 
 ####Usage####
 
-Simple sample fetching my IP from whatsmyip.org:
+How to fetch your IP from whatsmyip.org:
 ```csharp
 var browser = new Browser();
 
 var page = await browser.Open("http://www.whatsmyip.org/");
 
-var myIp = page.Select("#ip").InnerText;
+var myIp = page.Select("#ip").Text();
 
 ```
 
@@ -44,6 +44,7 @@ var myIp = page.Select("#ip").InnerText;
 
 [![scrappy MyGet Build Status](https://www.myget.org/BuildSource/Badge/scrappy?identifier=5cb40dd1-496c-4a81-ae15-41162c8df6f5)](https://www.myget.org/)
 
+Get the latest build from this NuGet feed: https://www.myget.org/F/scrappy/api/v2/
 
 [1]: https://github.com/jamietre/CsQuery
 
