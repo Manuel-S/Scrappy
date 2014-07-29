@@ -22,7 +22,7 @@ namespace Scrappy
         static WebResource()
         {
             MimeTypesByExtension = new Dictionary<string, string>();
-            Resources.MimeTypesByExtension.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Where(x => !string.IsNullOrWhiteSpace(x))
+            Resources.MimeTypesByExtension.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries).Where(x => !string.IsNullOrWhiteSpace(x))
                 .Select(x => x.Split('\t'))
                 .Where(x => x[0].Length > 0)
                 .ForEach(x => MimeTypesByExtension[x[0]] = x[1]);
@@ -43,10 +43,6 @@ namespace Scrappy
                 if (MimeTypesByExtension.TryGetValue(extension, out guessMimeType))
                 {
                     GuessMimeType = guessMimeType;
-                }
-                else
-                {
-                    GuessMimeType = Resources.MimeTypesByExtension;
                 }
             }
 
