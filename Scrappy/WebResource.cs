@@ -46,7 +46,7 @@ namespace Scrappy
                 }
                 else
                 {
-                    GuessMimeType = extension;
+                    GuessMimeType = Resources.MimeTypesByExtension;
                 }
             }
 
