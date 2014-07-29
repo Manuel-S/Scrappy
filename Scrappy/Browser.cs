@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using CsQuery;
 
@@ -19,6 +20,11 @@ namespace Scrappy
     {
         internal HttpClient Client { get; set; }
 
+        //=========================================================================================
+        /// <summary>
+        /// Creates a new Browser with default settings.
+        /// </summary>
+        //=========================================================================================
         public Browser()
         {
             DocType = DocType.Default;
@@ -34,6 +40,12 @@ namespace Scrappy
 
         }
 
+        //=========================================================================================
+        /// <summary>
+        /// Creates a new Browser with the injected HttpClient.
+        /// </summary>
+        /// <param name="client">The HttpClient the Browser is going to use.</param>
+        //=========================================================================================
         public Browser(HttpClient client)
         {
             Client = client;
@@ -71,7 +83,7 @@ namespace Scrappy
 
 
 
-        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, IEnumerable<KeyValuePair<string, string[]>> formData, bool asJson = false)
+        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson = false)
         {
             if (method == HttpVerb.Get)
             {
@@ -84,7 +96,8 @@ namespace Scrappy
             }
 
 
-            var httpcontent = new StringContent(asJson ? formData.ToJson() : formData.ToQuery());
+            var httpcontent = new StringContent(asJson ? formData.ToJson() : formData.ToQuery(), 
+                Encoding.UTF8, asJson ? "application/json" : "multipart/form-data");
 
             return await PostWithFormData(url, httpcontent);
         }
@@ -92,15 +105,16 @@ namespace Scrappy
         public async Task<WebPage> PostWithFormData(string url, HttpContent httpcontent)
         {
             var uri = new Uri(url);
-            string content;
 
             var response = await Client.PostAsync(uri, httpcontent);
             response.EnsureSuccessStatusCode();
-            content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync();
 
-            var page = new WebPage(this, content, new Uri(uri.GetLeftPart(UriPartial.Path))) {
-                Response = response };
-            
+            var page = new WebPage(this, content, new Uri(uri.GetLeftPart(UriPartial.Path)))
+            {
+                Response = response
+            };
+
             if (AutoDownloadResources)
             {
                 await Task.WhenAll(page.Resources.Select(res => res.Response));

@@ -44,6 +44,10 @@ namespace Scrappy
                 {
                     GuessMimeType = guessMimeType;
                 }
+                else
+                {
+                    GuessMimeType = extension;
+                }
             }
 
         }

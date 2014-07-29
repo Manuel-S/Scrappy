@@ -1,13 +1,10 @@
 ﻿using Microsoft.Owin.Hosting;
-using Microsoft.Owin;
 using Owin;
 using Scrappy;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using CsQuery;
 using CsQuery.ExtensionMethods;
 
@@ -72,7 +69,7 @@ namespace WebProxy
                     if (context.Request.Method == "POST")
                     {
                         var formdata = await context.Request.ReadFormAsync();
-                        page = await browser.OpenWithFormData(q, HttpVerb.Post, formdata);
+                        page = await browser.OpenWithFormData(q, HttpVerb.Post, formdata.ToDictionary(x => x.Key, x => x.Value[0]));
                     }
                     else if (context.Request.Method == "GET")
                     {
