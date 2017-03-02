@@ -20,6 +20,11 @@ namespace Scrappy
     {
         internal HttpClient Client { get; set; }
 
+        static Browser()
+        {
+            System.Net.ServicePointManager.Expect100Continue = false;
+        }
+
         //=========================================================================================
         /// <summary>
         /// Creates a new Browser with default settings.
@@ -83,7 +88,7 @@ namespace Scrappy
 
 
 
-        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson = false)
+        public async Task<WebPage> OpenWithFormData(string url, HttpVerb method, Dictionary<string, string> formData, bool asJson = false, string contentType = "application/x-www-form-urlencoded")
         {
             if (method == HttpVerb.Get)
             {
@@ -97,7 +102,7 @@ namespace Scrappy
 
 
             var httpcontent = new StringContent(asJson ? formData.ToJson() : formData.ToQuery(), 
-                Encoding.UTF8, asJson ? "application/json" : "multipart/form-data");
+                Encoding.UTF8, asJson ? "application/json" : contentType);
 
             return await PostWithFormData(url, httpcontent);
         }

@@ -66,6 +66,7 @@ namespace Scrappy
             set { formValues[key] = value; }
         }
 
+        public CQ Element => formNode;
 
         public Task<WebPage> Submit(bool asJson = false)
         {
