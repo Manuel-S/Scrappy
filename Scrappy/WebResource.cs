@@ -57,7 +57,7 @@ namespace Scrappy
             get
             {
                 return responseTask ?? 
-                    (responseTask = browser.Client.GetAsync(Uri)
+                    (responseTask = browser.HttpClient.GetAsync(Uri)
                                     .ContinueWith((response) => { GuessMimeType = response.Result.Content.Headers.ContentType.MediaType;
                                     return response.Result;
                                     }));

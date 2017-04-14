@@ -18,7 +18,7 @@ namespace Scrappy
 
     public class Browser
     {
-        internal HttpClient Client { get; set; }
+        public HttpClient HttpClient { get; set; }
 
         static Browser()
         {
@@ -35,12 +35,12 @@ namespace Scrappy
             DocType = DocType.Default;
             ParsingOptions = HtmlParsingOptions.Default;
             ParsingMode = HtmlParsingMode.Auto;
-            Client = new HttpClient();
+            HttpClient = new HttpClient();
 
             //Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
             //Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
-            Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
-            Client.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
 
 
         }
@@ -53,7 +53,7 @@ namespace Scrappy
         //=========================================================================================
         public Browser(HttpClient client)
         {
-            Client = client;
+            HttpClient = client;
             DocType = DocType.Default;
             ParsingOptions = HtmlParsingOptions.Default;
             ParsingMode = HtmlParsingMode.Auto;
@@ -70,7 +70,7 @@ namespace Scrappy
         public async Task<WebPage> Open(string url)
         {
             var uri = new Uri(url);
-            var response = await Client.GetAsync(uri);
+            var response = await HttpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             var content = await response.GetContentAsString();
             var page = new WebPage(this, content, uri)
@@ -111,7 +111,7 @@ namespace Scrappy
         {
             var uri = new Uri(url);
 
-            var response = await Client.PostAsync(uri, httpcontent);
+            var response = await HttpClient.PostAsync(uri, httpcontent);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
