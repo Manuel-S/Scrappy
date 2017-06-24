@@ -1,7 +1,7 @@
 
 
 
-![Scrappy Logo](Scrappy - small.png)  Scrappy  
+![Scrappy Logo](./Scrappy%20-%20small.png)  Scrappy  
 ======= 
 
 
@@ -28,6 +28,8 @@ var myIp = page.Select("#ip").Text();
 
 
 ####Samples####
+
+Samples are probably outdated as the web is quite volatile!
 
 * [WolframCalculator][s1]: Commandline tool which sends an expression to wolframalpha.com and displays the plain-text result to the user.
 * [Tests][s2]: Check out the tests for Scrappy to see what can be done with it. 
