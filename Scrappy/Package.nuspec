@@ -10,20 +10,14 @@
         <licenseUrl>https://raw.githubusercontent.com/Manuel-S/Scrappy/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>If you want to automate tasks in the web, this is your go to library. Navigate through websites with ease, fill out forms comfortably from your couch, let Scrappy do all the dirty work and get you what you want.</description>
-        <releaseNotes>First release, most basic use cases covered.</releaseNotes>
-        <copyright>Copyright 2014</copyright>
+        <releaseNotes>Tidied up packages.</releaseNotes>
+        <copyright>Copyright 2017</copyright>
         <tags>Crawl Scrape Html</tags>
         <dependencies>
-            <dependency id="CsQuery" version="1.3.4" />
-            <dependency id="Microsoft.Bcl" version="1.1.9"  />
-            <dependency id="Microsoft.Bcl.Build" version="1.0.14"  />
-            <dependency id="Microsoft.Net.Http" version="2.2.22" />
-            <dependency id="Newtonsoft.Json" version="6.0.3" />
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Release\Scrappy.dll" target="lib" />
-        <file src="bin\Release\Scrappy.dll.config" target="lib" />
-        <file src="bin\Release\Scrappy.pdb" target="lib" />
+        <file src="bin\Release\Scrappy.dll" target="lib\net462" />
+        <file src="bin\Release\Scrappy.pdb" target="lib\net462" />
     </files>
 </package>
