@@ -15,6 +15,10 @@
         <tags>Crawl Scrape Html</tags>
         <dependencies>
         </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.Net"  />
+            <frameworkAssembly assemblyName="System.ServiceModel" targetFramework="net40" />
+        </frameworkAssemblies>
     </metadata>
     <files>
         <file src="bin\Release\Scrappy.dll" target="lib\net462" />
