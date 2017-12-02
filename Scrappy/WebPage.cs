@@ -37,16 +37,19 @@ namespace Scrappy
                 }
             });
 
-
         }
 
         public HttpResponseMessage Response {get; set;}
 
         private void AddWebResource(string resourceUrl, IDomObject item)
         {
-            var resource = new WebResource(ConstructUri(resourceUrl), browser, this, item.NodeName);
+            try
+            {
+                var resource = new WebResource(ConstructUri(resourceUrl), browser, this, item.NodeName);
 
-            ResourceDictionary.Add(item, resource);
+                ResourceDictionary.Add(item, resource);
+            }
+            catch { }
         }
 
         public Form GetForm(string selector)
